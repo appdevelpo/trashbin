@@ -182,6 +182,6 @@ export default class extends Extension {
     return{
       type:"hls",
       url:url
-
+    }
   }
 }
