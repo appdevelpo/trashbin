@@ -90,6 +90,14 @@ var latest = async(page) =>{
     console.log(a)
     const b = await getData("test")
     console.log(b)
+    const re = await rawRequest(`https://yugenanime.tv/latest/?page=${page}`)
+    console.log(re.headers)
+    var  cookie = await listCookies();
+    console.log(cookie)
+    const result = await setCookie("csrftoken=NutCsth2Ma6yXMqQMZMJJIzYZSzlS0000ffff  ")
+    console.log(result)
+    var  cookie = await listCookies();
+    console.log(cookie)
     const res = await request(`/latest/?page=${page}`);
     const {document:doc} = parseHTML(res);
     const bsxList = doc.querySelectorAll("li.ep-card"); 
