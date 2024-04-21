@@ -10,9 +10,11 @@
 // @webSite      https://yugenanime.tv
 // @nsfw         false
 // @api          2
+// @tags          anime,english
 // ==/MiruExtension==
 
 var search = async(kw, page) =>{
+    snackbar("searching");
     const res = await request(`/discover/?page=${page}&q=${kw}`);
     const {document:doc} = parseHTML(res);
     const bsxList = doc.querySelectorAll("a.anime-meta");
@@ -31,6 +33,7 @@ var search = async(kw, page) =>{
 
 }
 var detail = async(url) =>{
+    snackbar("This is detail");
     const res = await request(`${url}watch`);
     const {document:doc} = parseHTML(res);
     const title = doc.querySelector(".content > .p-10-t").innerHTML;
@@ -55,6 +58,7 @@ var detail = async(url) =>{
 }
 var watch = async(url) =>{
     const res = await request(url);
+    snackbar("you are watching the video, please wait a moment");
     const {document:doc} = parseHTML(res);
     const embedSelector = doc.querySelector("#main-embed").getAttribute("src");
     console.log(embedSelector)
@@ -81,6 +85,11 @@ var watch = async(url) =>{
 
 }
 var latest = async(page) =>{
+    snackbar("Loading...");
+    const a = await saveData("test", "this saving test")
+    console.log(a)
+    const b = await getData("test")
+    console.log(b)
     const res = await request(`/latest/?page=${page}`);
     const {document:doc} = parseHTML(res);
     const bsxList = doc.querySelectorAll("li.ep-card"); 
